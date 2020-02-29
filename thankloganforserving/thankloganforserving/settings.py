@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "thank_logan.apps.ThankLoganConfig",
+    "polls.apps.PollsConfig",
 ]
 
 MIDDLEWARE = [

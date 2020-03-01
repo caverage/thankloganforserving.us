@@ -1,0 +1,12 @@
+#foo {
+  background-color: white;
+  padding: 8px
+}
+
+p {
+  color: black;
+}
+
+body {
+    background: white url("images/flag.gif");
+ }

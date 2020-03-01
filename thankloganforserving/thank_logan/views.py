@@ -27,7 +27,13 @@ def _thanked_today():
 
 def index(request):
     tomorrow = timezone.localtime(timezone.now()) + timezone.timedelta(days=1)
-    context = {"thanked": _thanked_today(), "tomorrow": tomorrow.date()}
+    most_recent_thanker = Thank.objects.all().order_by("-id")[0].thanker
+    print(most_recent_thanker)
+    context = {
+        "thanked": _thanked_today(),
+        "tomorrow": tomorrow.date(),
+        "most_recent_thanker": most_recent_thanker,
+    }
 
     return render(request, "thank_logan/index.html", context)
 

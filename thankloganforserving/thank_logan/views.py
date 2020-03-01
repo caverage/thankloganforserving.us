@@ -14,7 +14,10 @@ def _thanked_today():
     try:
         most_recent_thank = Thank.objects.all().order_by("-id")[0]
         # breaks if someone waits a year to thank him
-        thanked_today = timezone.now().date() == most_recent_thank.timestamp.date()
+        thanked_today = (
+            timezone.localtime(timezone.now()).date()
+            == most_recent_thank.timestamp.date()
+        )
     except IndexError:
         # this means no thanks on record :(
         thanked_today = False
@@ -23,7 +26,7 @@ def _thanked_today():
 
 
 def index(request):
-    tomorrow = timezone.now() + timezone.timedelta(days=1)
+    tomorrow = timezone.localtime(timezone.now()) + timezone.timedelta(days=1)
     context = {"thanked": _thanked_today(), "tomorrow": tomorrow.date()}
 
     return render(request, "thank_logan/index.html", context)

@@ -2,11 +2,15 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'thank_logan/style.css' %}">
 
-<div style="display: flex; justify-content: center;">
-<div id=foo>
-<h1>ThankLoganForServing.Us</h1>
+<div id="wrapper">
+<div id="container">
+  <h1>ThankLoganForServing.Us</h1>
+<hr>
+<div id=flexcontainer>
+<div class=content>
 
 {% if not thanked %}
+<h2> Logan Has Not Been Thanked Today </h2>
 <form action="{% url 'thank_logan:thank' %}" method="post">
 {% csrf_token %}
 <label for="name">Who is thanking Logan?</label><br>
@@ -16,9 +20,12 @@
 
 
 {% else %}
+<h2> Logan Has Been Thanked Today </h2>
+
 <p>
-Logan has already been thanked today by {{ most_recent_thanker }}.
+Today's thank brought to you by: <b>{{ most_recent_thanker }}</b>.
 </p>
+
 <p id="countdown"></p>
 
 <p>
@@ -58,5 +65,24 @@ countdown()
 setInterval(countdown, 1000);
 </script>
 {% endif %}
+
+</div>
+</div>
+<div id=about class=content style="max-width: 100%">
+  <h2>About</h2>
+  <p class=text>This website is dedicated to thanking our good friend Logan for serving us. Each day, he can be thanked by one person. At midnight each night it will be possible to thank Logan again. You have to be quick if you want to thank him!</p>
+  <h3>Credits</h3>
+  <p>This site is only possible because of the following people:</p>
+  <ul>
+    <li><b>Chad:</b> The idea, funding, emotional support and motivation. </li>
+    <li><b>Jordan:</b> Funding, cheesecake, letting Nic sleep in my bedroom. </li>
+    <li><b>Darren:</b> Answering questions about JS. </li>
+    <li><b>Ruth Bader Ginsburg:</b> Logan's favorite person. </li>
+    <li><b>The VA:</b> Providing steps for Logan t̷o̴ k̴̮̒̑͠ī̴̺̂̈́l̸̪̫̽l̴̝͆ ̷̲͍͒̿̓ḥ̶̛̏͜͝i̶̜̬͑̇m̵̠̟̽s̷͔͒e̷͎̼͂̓̀͜l̵̼̘͒f̴͙̙̐ ̴̠̟́͑͝ö̵͖̱́̍̾n̸͚̯͂̌͠.̴̺͍̔͆. </li>
+    <li><b>Logan:</b> Serving us. </li>
+  </ul>
+
+  <p style="font-size:1vmin"> <a href="https://github.com/caverage/thankloganforserving.us">Source</a>
+</div>
 </div>
 </div>

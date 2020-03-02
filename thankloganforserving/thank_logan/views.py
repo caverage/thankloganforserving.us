@@ -10,9 +10,14 @@ from django.utils import timezone
 from .models import Thank
 
 
+def _most_recent_thank():
+    return Thank.objects.all().latest("timestamp")
+
+
 def _thanked_today():
     try:
-        most_recent_thank = Thank.objects.all().order_by("-id")[0]
+        most_recent_thank = _most_recent_thank()
+        print(most_recent_thank)
         # breaks if someone waits a year to thank him
         thanked_today = (
             timezone.localtime(timezone.now()).date()
@@ -25,14 +30,23 @@ def _thanked_today():
     return thanked_today
 
 
+def _current_streak():
+    pass
+
+
+def _longest_streak():
+    return True
+
+
 def index(request):
     tomorrow = timezone.localtime(timezone.now()) + timezone.timedelta(days=1)
-    most_recent_thanker = Thank.objects.all().order_by("-id")[0].thanker
-    print(most_recent_thanker)
+    most_recent_thanker = _most_recent_thank().thanker
     context = {
         "thanked": _thanked_today(),
         "tomorrow": tomorrow.date(),
         "most_recent_thanker": most_recent_thanker,
+        "current_streak": _current_streak(),
+        "longest_streak": _longest_streak(),
     }
 
     return render(request, "thank_logan/index.html", context)

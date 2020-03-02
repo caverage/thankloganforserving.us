@@ -1,10 +1,65 @@
-#foo {
-  background-color: white;
-  padding: 8px
+#container {
+  background-color: #eeeeee;
+  padding: 15px;
+  display: inline-block;
+  text-align: left;
 }
 
-p {
+#wrapper {
+  text-align: center;
+}
+
+#flexcontainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#about {
+
+}
+
+.content {
+  border-style: dotted;
+  padding: 10px;
+  margin: 5px;
+}
+
+th, .title {
+  text-align: center;
+  font-size: 2.2vmin;
+}
+
+table, th, td {
+  font-size: 1.8vmin;
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: left;
+
+}
+
+h1 {
+  font-size: 4vmin;
+}
+h2 {
+  font-size: 3vmin;
+}
+p, h3 {
+  font-size: 2vmin;
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
+
+div {
+  padding: 5px
+}
+
+.text {
   color: black;
+  max-width: 500px;
 }
 
 body {

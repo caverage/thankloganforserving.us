@@ -44,7 +44,7 @@ h1 {
 h2 {
   font-size: 3vmin;
 }
-p, h3 {
+p, ul, label, h3, input {
   font-size: 2vmin;
 }
 
@@ -57,8 +57,7 @@ div {
 }
 
 .text {
-  color: black;
-  max-width: 500px;
+  max-width: 30em;
 }
 
 body {

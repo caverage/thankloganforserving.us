@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# this would be best put in a cron running every minute or so.
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+# get the directory this script is located
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source ${__dir}/SECRETS
+source ${__dir}/venv/bin/activate
+
+python thankloganforserving/manage.py text_logan

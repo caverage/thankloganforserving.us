@@ -68,6 +68,7 @@ setInterval(countdown, 1000);
 </div>
 
 <div id=stats class=content>
+{% comment %}
 <div>
 <table>
   <tr>
@@ -83,6 +84,8 @@ setInterval(countdown, 1000);
   </tr>
 </table>
 </div>
+{% endcomment %}
+
 <div>
 <table>
   <tr>
@@ -93,11 +96,19 @@ setInterval(countdown, 1000);
     <th>Name</th>
     <th>Thanks</th>
   </tr>
+  {% for thanker in leader_board %}
   <tr>
-    <td>1</td>
-    <td>Chad</td>
-    <td>5</td>
+    <td>{{ thanker.position }}</td>
+    <td>{{ thanker.thanker }}</td>
+    <td>{{ thanker.count }}</td>
   </tr>
+  {% empty %}
+  <tr>
+    <td>0</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+  {% endfor %}
 </table>
 </div>
 </div>

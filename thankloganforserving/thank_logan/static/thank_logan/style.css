@@ -16,6 +16,10 @@
   flex-wrap: wrap;
 }
 
+#countdown {
+  font-weight: bold;
+}
+
 #about {
   max-width: 100%;
   display: inline-block;
@@ -24,6 +28,12 @@
 
 #thank {
   max-width: 50%;
+}
+
+#thanker {
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2em;
 }
 
 .content {

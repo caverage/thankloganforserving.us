@@ -12,4 +12,4 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source ${__dir}/SECRETS
 source ${__dir}/venv/bin/activate
 
-python thankloganforserving/manage.py text_logan
+python ${__dir}/thankloganforserving/manage.py text_logan

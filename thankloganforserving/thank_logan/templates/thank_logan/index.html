@@ -2,12 +2,12 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'thank_logan/style.css' %}">
 
-<div id="wrapper">
+<div class="wrapper">
 <div id="container">
   <h1>ThankLoganForServing.Us</h1>
-<hr>
+  <hr>
 <div id=flexcontainer>
-<div class=content>
+<div id=thank class=content>
 
 {% if not thanked %}
 <h2> Logan Has Not Been Thanked Today </h2>
@@ -65,10 +65,46 @@ countdown()
 setInterval(countdown, 1000);
 </script>
 {% endif %}
+</div>
+
+<div id=stats class=content>
+<div>
+<table>
+  <tr>
+    <th class=title colspan="2">Streaks</th>
+  </tr>
+  <tr>
+    <th>Current</th>
+    <td>{{ current_streak }}</td>
+  </tr>
+  <tr>
+    <th>Longest</th>
+    <td>{{ longest_streak }}</td>
+  </tr>
+</table>
+</div>
+<div>
+<table>
+  <tr>
+    <th class=title colspan="3">Leaderboard</th>
+  </tr>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Thanks</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Chad</td>
+    <td>5</td>
+  </tr>
+</table>
+</div>
+</div>
 
 </div>
-</div>
-<div id=about class=content style="max-width: 100%">
+<div class=wrapper>
+<div id=about class=content>
   <h2>About</h2>
   <p class=text>This website is dedicated to thanking our good friend Logan for serving us. Each day, he can be thanked by one person. At midnight each night it will be possible to thank Logan again. You have to be quick if you want to thank him!</p>
   <h3>Credits</h3>
@@ -84,6 +120,7 @@ setInterval(countdown, 1000);
   </ul>
 
   <p style="font-size:1vmin"> <a href="https://github.com/caverage/thankloganforserving.us">Source</a>
+</div>
 </div>
 </div>
 </div>

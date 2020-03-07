@@ -7,7 +7,11 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import Thank
+from .models import SMSQueue, Thank
+
+
+def _now():
+    return timezone.localtime(timezone.now())
 
 
 def _most_recent_thank():
@@ -17,13 +21,12 @@ def _most_recent_thank():
 def _thanked_today():
     try:
         most_recent_thank = _most_recent_thank()
-        print(most_recent_thank)
-        # breaks if someone waits a year to thank him
         thanked_today = (
-            timezone.localtime(timezone.now()).date()
-            == most_recent_thank.timestamp.date()
+            _now().date() == timezone.localtime(most_recent_thank.timestamp).date()
         )
-    except IndexError:
+        print(_now().date())
+        print(most_recent_thank.timestamp.date())
+    except Thank.DoesNotExist:
         # this means no thanks on record :(
         thanked_today = False
 
@@ -31,16 +34,21 @@ def _thanked_today():
 
 
 def _current_streak():
-    pass
+    return None
 
 
 def _longest_streak():
-    return True
+    return None
 
 
 def index(request):
-    tomorrow = timezone.localtime(timezone.now()) + timezone.timedelta(days=1)
-    most_recent_thanker = _most_recent_thank().thanker
+    print(_now().date())
+    tomorrow = _now() + timezone.timedelta(days=1)
+    try:
+        most_recent_thanker = _most_recent_thank().thanker
+    except Thank.DoesNotExist:
+        # this means no thanks on record :(
+        most_recent_thanker = None
     context = {
         "thanked": _thanked_today(),
         "tomorrow": tomorrow.date(),
@@ -55,17 +63,10 @@ def index(request):
 def give_thanks(request):
     if not _thanked_today():
         thanker = request.POST.get("name", None)
-        thank = Thank(timestamp=timezone.now(), thanker=thanker)
+        print(_now)
+        thank = Thank(timestamp=_now(), thanker=thanker)
         thank.save()
 
-        endpoint = "http://smsgw.sip.us/api/v1/18775902283/send"
-        key = os.environ["SMS_KEY"]
-        destination = os.environ["LOGAN_CELL"]
-        message = f"{thanker} thanks you for your service!"
-        data = {"key": key, "destination": destination, "message": message}
-
-        thank_message = requests.post(url=endpoint, data=data)
-
-        print(thank_message.text)
+        SMSQueue(thank=thank).save()
 
     return HttpResponseRedirect(reverse("thank_logan:index"))
